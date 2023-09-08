@@ -1,0 +1,40 @@
+# O(n) complexity: Psyche's approach
+def help_armyants(crops):
+    categories = {}
+
+    for crop in crops:
+        if crop in categories:
+            categories[crop] += 1
+        else:
+            categories[crop] = 1
+
+    return categories
+
+crops_in_barn = ["Oats", "Rice", "Cous-Cous", "Black-Bean", "Green-Bean"]
+categorized_crops = help_armyants(crops_in_barn)
+
+for crop, count in categorized_crops.items():
+    print(f"{count} jars of {crop}")
+
+
+# O(1) complexity: Labelling jar with set - Psyche's efficient approach
+def label_jar_with_set(crops, labels):
+    labeled_jars = {}
+
+    for label in labels:
+        labeled_jars[label] = set()
+
+    for crop, weight in crops:
+        labeled_jars[crop].add(weight)
+
+    return labeled_jars
+
+crops_and_weights = [("Oats", "3 lbs"), ("Cous-Cous", "1 lbs"), ("Black-Bean", "3 lbs"), ("Green-Bean", "1 lbs")]
+jar_labels = ["Oats", "Rice", "Cous-Cous", "Black-Bean", "Green-Bean"]
+labeled_jars = label_jar_with_set(crops_and_weights, jar_labels)
+
+for label, weights in labeled_jars.items():
+    print(f"{label} jars contain weights: {', '.join(weights)}")
+
+
+
