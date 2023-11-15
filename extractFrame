@@ -1,0 +1,23 @@
+# Read the "wireShark.txt" file
+with open("wireShark.txt", "r") as file:
+    content = file.read()
+
+# Split the content into frames
+aqua = content.split("Frame ")
+
+# Process each frame
+for frame in aqua[1:]:
+    marine = frame.strip().split("\n")
+
+    frame_number = marine[0].split(":")[0].strip()
+
+    source_line = [line for line in marine if "Source:" in line][0]
+    source_address = source_line.split("(")[1].split(")")[0]
+
+    dest_line = [line for line in marine if "Destination:" in line][0]
+    dest_address = dest_line.split("(")[1].split(")")[0]
+
+    frame_type_line = [line for line in marine if "Type:" in line]
+    frame_type = frame_type_line[0].split("Type:")[1].strip() if frame_type_line else "N/A"
+
+    print(f"Frame {frame_number}, Src:{source_address}, Des:{dest_address}, Type:{frame_type}")
